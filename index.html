@@ -1,0 +1,214 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Boda Samantha & Fernando</title>
+
+<link href="https://fonts.googleapis.com/css2?family=Great+Vibes&family=Montserrat:wght@300;500&display=swap" rel="stylesheet">
+
+<style>
+body{
+    margin:0;
+    font-family:'Montserrat', sans-serif;
+    color:#fff;
+    text-align:center;
+    overflow-x:hidden;
+    background:black;
+}
+
+/* PORTADA */
+#cover{
+    position:fixed;
+    width:100%;
+    height:100vh;
+    background: url('F1.jfif') center/cover no-repeat;
+    display:flex;
+    flex-direction:column;
+    justify-content:center;
+    align-items:center;
+    z-index:10;
+}
+
+#cover h1{
+    font-family:'Great Vibes';
+    font-size:60px;
+}
+
+#openBtn{
+    padding:15px 30px;
+    border:none;
+    border-radius:30px;
+    background:#d4af37;
+    color:white;
+    font-size:18px;
+}
+
+/* CONTENIDO */
+#main{
+    display:none;
+    background: url('F2.jfif') center/cover fixed;
+}
+
+.overlay{
+    background:rgba(0,0,0,0.6);
+    padding:20px;
+    min-height:100vh;
+}
+
+h1{
+    font-family:'Great Vibes';
+    font-size:65px;
+}
+
+.card{
+    background:rgba(255,255,255,0.1);
+    backdrop-filter: blur(10px);
+    border-radius:20px;
+    padding:25px;
+    margin:20px auto;
+    max-width:500px;
+}
+
+.btn{
+    display:block;
+    margin:15px auto;
+    padding:15px;
+    border-radius:30px;
+    text-decoration:none;
+    color:white;
+    font-weight:bold;
+    width:80%;
+    transition:0.3s;
+}
+
+.btn:hover{transform:scale(1.05);}
+
+.whatsapp{background:#25D366;}
+.maps{background:#d4af37;}
+
+.countdown{
+    font-size:22px;
+}
+
+/* PÉTALOS */
+.petal{
+    position:fixed;
+    top:-10px;
+    width:15px;
+    height:15px;
+    background:pink;
+    border-radius:50%;
+    opacity:0.7;
+    animation:fall linear infinite;
+}
+
+
+
+@keyframes fall{
+    to{
+        transform:translateY(100vh) rotate(360deg);
+    }
+}
+</style>
+</head>
+
+<body>
+
+<!-- PORTADA -->
+<div id="cover">
+    <h1>Samantha & Fernando</h1>
+    <p>22 de agosto 2026</p>
+    <button id="openBtn">Abrir invitación</button>
+</div>
+
+<!-- CONTENIDO -->
+<div id="main">
+<div class="overlay">
+
+<h1>¡Nos casamos! 💍</h1>
+
+<div class="countdown" id="countdown"></div>
+
+<div class="card">
+<p>Con mucha alegría te invitamos a celebrar nuestra boda Civil</p>
+
+<h3>📅 22 de agosto 2026</h3>
+<h3>⛪ Recepcion Jardín Aitana 3:00 PM</h3>
+<h3>   Ceremonia 4:00 PM</h3>
+</div>
+
+<div class="card">
+<h3>Confirma tu asistencia</h3>
+
+<a class="btn whatsapp" 
+href="https://docs.google.com/forms/d/e/1FAIpQLSf3rOsAbSN7GkKUEj9D_AFPJgBlyZ8x_HfU-C2CKExcUMS7Pg/viewform?usp=publish-editor">
+Confirmar asistencia
+</a>
+
+<h3>Ubicación</h3>
+
+<a class="btn maps" 
+href="https://maps.google.com/?q=Jardín+Aitana+Ecatepec">
+Ver en Google Maps
+</a>
+</div>
+
+<!-- GALERÍA -->
+<div class="container">
+<div class="card">
+<h3>Nuestra historia ❤️</h3>
+<img src="S1.jpeg" style="width: 100%; height: auto"alt="D">
+<img src="S2.jpeg" style="width: 100%; height: auto"alt="D">
+<img src="S3.jpeg" style="width: 100%; height: auto"alt="D">
+<p>¡Te esperamos! ✨</p>
+</div>
+
+</div>
+
+
+
+
+</div>
+</div>
+
+<!-- AUDIO -->
+<audio id="music" loop>
+<source src="https://www.bensound.com/bensound-music/bensound-romantic.mp3" type="audio/mp3">
+</audio>
+
+<script>
+// Abrir invitación
+document.getElementById("openBtn").onclick = function(){
+    document.getElementById("cover").style.display="none";
+    document.getElementById("main").style.display="block";
+    document.getElementById("music").play();
+}
+
+// Cuenta regresiva
+const targetDate = new Date("Aug 22, 2026 15:00:00").getTime();
+
+setInterval(() => {
+    const now = new Date().getTime();
+    const distance = targetDate - now;
+
+    const days = Math.floor(distance / (1000*60*60*24));
+    const hours = Math.floor((distance%(1000*60*60*24))/(1000*60*60));
+    const minutes = Math.floor((distance%(1000*60*60))/(1000*60));
+
+    document.getElementById("countdown").innerHTML =
+    `Faltan ${days} días ${hours}h ${minutes}m`;
+},1000);
+
+// PÉTALOS
+for(let i=0;i<20;i++){
+    let petal = document.createElement("div");
+    petal.classList.add("petal");
+    petal.style.left = Math.random()*100+"%";
+    petal.style.animationDuration = (5+Math.random()*5)+"s";
+    document.body.appendChild(petal);
+}
+</script>
+
+</body>
+</html>
